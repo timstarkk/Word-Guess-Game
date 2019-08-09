@@ -8,10 +8,8 @@ const wins = 0;
 const guessesRemaining = 12;
 
 function game() {
-    console.log("running");
     let currentWord = words[Math.floor(Math.random() * words.length)];
     const underscore = [];
-    console.log(currentWord);
     // currentWord.append(words[Math.floor])
 
     for (let i = 0; i < currentWord.length; i++) {
@@ -19,7 +17,6 @@ function game() {
         $('#randomWord').text(displayedWord.join(' '));
     }
 
-    console.log(displayedWord);
 }
 
 game();
