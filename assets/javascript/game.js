@@ -7,6 +7,7 @@ let playerGuess = [];
 let lettersUsed = [];
 let wins = 0;
 let guessesRemaining = 12;
+let correctInput = false;
 
 
 // THIS FUNCTION RUNS AT READY. IT GRABS A RANDOM WORD AND POPULATES THE UNDERSCORED VERSION & GUESSES REMAINING
@@ -28,15 +29,31 @@ $(document).on('keyup', function (event) {
     guessCap = guess.toUpperCase();
     console.log(guessCap);
 
-    for (let i = 0; i < currentWord.length; i++) {
-        if (guessCap === currentWord[i]) {
-            displayedWord[i] = guessCap;
+    // this loop checks if the guess is a letter of the alphabet
+    for (let i = 0; i < alphabet.length; i++) {
+        if (guessCap === alphabet[i]) {
+            correctInput = true;
+            console.log(correctInput);
+            break;
+        } else {
+            correctInput = false;
+            console.log(correctInput);
         };
     };
 
-    // if (guessCap === '') NEED TO LOOP THROUGH THE ALPHABET ARRAY BEFORE ADDING TO USEDLETTERS. PROB AT FUNCTION START ACTUALLY
-    $('#usedLetters').append(guessCap);
-    $('#guesses').text(guessesRemaining);
-    $('#randomWord').text(displayedWord.join(' '));
+    // if the pressed key was indeed a letter of the alphabet, the code below here will run
+    if (correctInput === true) {
+
+        for (let i = 0; i < currentWord.length; i++) {
+            if (guessCap === currentWord[i]) {
+                displayedWord[i] = guessCap;
+            };
+        };
+
+        $('#usedLetters').append(guessCap);
+        $('#guesses').text(guessesRemaining);
+        $('#randomWord').text(displayedWord.join(' '));
+
+    };
 
 });
