@@ -9,7 +9,7 @@ let wins = 0;
 let guessesRemaining = 12;
 
 
-// THIS FUNCTION GRABS A RANDOM WORD AND POPULATES THE UNDERSCORES & GUESSES REMAINING
+// THIS FUNCTION RUNS AT READY. IT GRABS A RANDOM WORD AND POPULATES THE UNDERSCORED VERSION & GUESSES REMAINING
 $(document).ready(function onStart() {
     currentWord = words[Math.floor(Math.random() * words.length)];
 
@@ -20,8 +20,6 @@ $(document).ready(function onStart() {
 
     $('#guesses').text(guessesRemaining);
 });
-
-console.log(displayedWord);
 
 // THIS FUNCTION HANDLES THE GAMEPLAY WHEN A KEY IS PRESSED
 $(document).on('keyup', function (event) {
@@ -42,5 +40,3 @@ $(document).on('keyup', function (event) {
     $('#randomWord').text(displayedWord.join(' '));
 
 });
-
-// onStart();
