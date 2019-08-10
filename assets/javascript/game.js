@@ -1,59 +1,100 @@
 
 const words = ['KENSHIN', 'TACOO'];
 const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-let currentWord = [];
-let displayedWord = [];
-let playerGuess = [];
-let lettersUsed = [];
-let wins = 0;
-let guessesRemaining = 12;
-let correctInput = false;
 
+const gameCode = {
 
-// THIS FUNCTION RUNS AT READY. IT GRABS A RANDOM WORD AND POPULATES THE UNDERSCORED VERSION & GUESSES REMAINING
-$(document).ready(function onStart() {
-    currentWord = words[Math.floor(Math.random() * words.length)];
+    currentWord: [],
+    displayedWord: [],
+    playerGuess: [],
+    lettersUsed: [],
+    wins: 0,
+    guessesRemaining: 7,
+    alphabet: false,
+    used: false,
 
-    for (let i = 0; i < currentWord.length; i++) {
-        displayedWord.push("_");
-        $('#randomWord').text(displayedWord.join(' '));
-    }
+    // THIS FUNCTION RUNS AT READY. IT GRABS A RANDOM WORD AND POPULATES THE UNDERSCORED VERSION & GUESSES REMAINING
+    getRandomWord: function () {
+        gameCode.currentWord = words[Math.floor(Math.random() * words.length)];
 
-    $('#guesses').text(guessesRemaining);
-});
+        for (let i = 0; i < gameCode.currentWord.length; i++) {
+            gameCode.displayedWord.push("_");
+            $('#randomWord').text(gameCode.displayedWord.join(' '));
+        }
 
-// THIS FUNCTION HANDLES THE GAMEPLAY WHEN A KEY IS PRESSED
-$(document).on('keyup', function (event) {
-    guessesRemaining -= 1;
-    let guess = event.key;
-    guessCap = guess.toUpperCase();
-    console.log(guessCap);
+        $('#guesses').text(gameCode.guessesRemaining);
+    },
 
-    // this loop checks if the guess is a letter of the alphabet
-    for (let i = 0; i < alphabet.length; i++) {
-        if (guessCap === alphabet[i]) {
-            correctInput = true;
-            console.log(correctInput);
-            break;
-        } else {
-            correctInput = false;
-            console.log(correctInput);
+    makeUpperCase: function () {
+        let guess = event.key;
+        guessCap = guess.toUpperCase();
+    },
+
+    checkInput: function () {
+        for (let i = 0; i < alphabet.length; i++) {
+
+            if (guessCap === alphabet[i]) {
+
+                for (let i = 0; i <= gameCode.lettersUsed.length; i++) {
+                    if (guessCap === gameCode.lettersUsed[i]) {
+                        console.log('used')
+                        gameCode.used = true;
+                        break;
+                    } else {
+                        console.log('not used')
+                        gameCode.used = false;
+                        console.log(gameCode.lettersUsed);
+                    }
+                }
+                console.log('console log used ' + gameCode.used);
+                if (gameCode.used === false) {
+                    gameCode.lettersUsed.push(guessCap);
+                    console.log('hello');
+                    gameCode.correctInput = true;
+                    gameCode.guessesRemaining -= 1;
+                    //game over alert if statement.
+                    if (gameCode.guessesRemaining === 0) {
+                        alert('You Lose!');
+                        //reset game
+                    }
+                    break;
+                }
+            } else {
+                gameCode.correctInput = false;
+            };
+
         };
-    };
+    },
 
-    // if the pressed key was indeed a letter of the alphabet, the code below here will run
-    if (correctInput === true) {
+    checkForLetterMatch: function () {
+        if (gameCode.correctInput === true) {
 
-        for (let i = 0; i < currentWord.length; i++) {
-            if (guessCap === currentWord[i]) {
-                displayedWord[i] = guessCap;
+            for (let i = 0; i < gameCode.currentWord.length; i++) {
+                if (guessCap === gameCode.currentWord[i]) {
+                    gameCode.displayedWord[i] = guessCap;
+                    gameCode.guessesRemaining += 1;
+                };
             };
         };
+    },
 
-        $('#usedLetters').append(guessCap);
-        $('#guesses').text(guessesRemaining);
-        $('#randomWord').text(displayedWord.join(' '));
+    updateEverything: function () {
+        console.log('update everything');
+        console.log(gameCode.correctInput);
+        if (gameCode.correctInput === true) {
+            $('#usedLetters').append(guessCap);
+            $('#guesses').text(gameCode.guessesRemaining);
+            $('#randomWord').text(gameCode.displayedWord.join(' '));
+        }
+    }
+}
 
-    };
 
+gameCode.getRandomWord();
+
+$(document).on('keyup', function (e) {
+    gameCode.makeUpperCase();
+    gameCode.checkInput();
+    gameCode.checkForLetterMatch();
+    gameCode.updateEverything();
 });
