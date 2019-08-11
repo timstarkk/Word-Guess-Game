@@ -1,5 +1,5 @@
 
-const words = ['KENSHIN', 'TACOO'];
+const words = ['WESTEROS', 'STARK', 'LANNISTER', 'TARGARYEN', 'SNOW', 'DAENERYS', 'WINTERFELL', 'ARYA', 'WHITEWALKER', 'DRAGON'];
 const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 const gameCode = {
@@ -86,6 +86,7 @@ const gameCode = {
         console.log('update everything');
         if (gameCode.correctInput === true) {
             $('#usedLetters').append(guessCap);
+            console.log(guessCap);
             $('#guesses').text(`Guesses Remaining: ${gameCode.guessesRemaining}`);
             $('#randomWord').text(gameCode.displayedWord.join(' '));
         }
@@ -103,9 +104,12 @@ const gameCode = {
 
         console.log(`win handler condition: ${gameCode.winCondition}`);
         if (gameCode.winCondition === true) {
-            $('#alerts').text('you win, press any key to continue.')
+            $('#alerts').text('You Win! press any key to continue.')
+            document.querySelector('#winSound').play();
+            console.log('you win');
         } else if (gameCode.guessesRemaining === 0) {
-            $('#alerts').text('You Lose! Press any key to play again!');
+            $('#alerts').text('You Lose! Press any key to play again...');
+            document.querySelector('#loseSound').play();
         }
 
     },

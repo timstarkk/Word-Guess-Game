@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Word Guess Game</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <style>
         /* .row {
             border: 2px solid red;
@@ -28,10 +28,6 @@
             border: 2px solid blue;
             margin-top: 5px;
             margin-bottom: 5px;
-        }
-
-        .border {
-            border: 2px solid black;
         } */
     </style>
 </head>
@@ -40,37 +36,41 @@
 
     <div class="row">
         <div class="container">
-            <div class="row offset-3 col-6">
+            <div class="row offset-3 col-6 tan goldBorder logoBox">
                 <img src="assets/images/guessing.png" alt="guessing game" id="guessLogo">
+                <audio id="loseSound">
+                    <source src="assets/audio/lose.mp3" type="audio/mpeg"></audio>
+                <audio id="winSound">
+                    <source src="assets/audio/win.mp3" type="audio/mpeg"></audio>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="container">
+        <div class="container tan goldBorder">
             <div class="row">
-                <h5 class="col-12 text-center" id="alerts">
+                <h5 class="col-12 text-center goldBorder " id="alerts">
                     press any key to get started!
                 </h5>
-                <div class="col-12 text-center" id="randomWord">
+                <div class="col-12 text-center goldBorder" id="randomWord">
 
                 </div>
-                <div class="col-md-6 text-center" id="wins">
+                <div class="col-md-6 text-center goldBorder" id="wins">
                     Wins:
                 </div>
-                <div class="col-md-6 text-center" id="guesses">
+                <div class="col-md-6 text-center goldBorder" id="guesses">
                     Guesses Remaining:
                 </div>
-                <div class="col-12" id="usedLetters">
+                <div class="col-12 goldBorder" id="usedLetters">
                     Letters Already Guessed:
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <footer>
             this is the footer
         </footer>
-    </div>
+    </div> -->
     <script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>
 

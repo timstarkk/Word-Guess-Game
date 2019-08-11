@@ -4,12 +4,25 @@ body {
 	background-size: cover;
 	background-position: center;
 	height: 100vh;
-};
+}
 
 h1 {
     color: green;
-};
+}
 
-img {
-    height: 90px;
-};
+#guessLogo {
+    height: 200px;
+}
+
+.logoBox {
+    display: flex;
+    justify-content: center;
+}
+
+.tan {
+    background: #E6D7B7;
+}
+
+.goldBorder {
+    border: 2px solid goldenrod;
+}
