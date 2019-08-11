@@ -1,4 +1,15 @@
-.center {
-    display: flex;
-    justify-content: center;
-}
+body {
+    background-image: url("../images/westerosDrawing.jpg");
+    background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	height: 100vh;
+};
+
+h1 {
+    color: green;
+};
+
+img {
+    height: 90px;
+};
