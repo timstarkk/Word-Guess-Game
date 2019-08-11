@@ -12,9 +12,11 @@ const gameCode = {
     guessesRemaining: 7,
     alphabet: false,
     used: false,
+    winCondition: false,
 
     // THIS FUNCTION RUNS AT READY. IT GRABS A RANDOM WORD AND POPULATES THE UNDERSCORED VERSION & GUESSES REMAINING
     getRandomWord: function () {
+        console.log(`get random word`)
         gameCode.currentWord = words[Math.floor(Math.random() * words.length)];
 
         for (let i = 0; i < gameCode.currentWord.length; i++) {
@@ -22,7 +24,9 @@ const gameCode = {
             $('#randomWord').text(gameCode.displayedWord.join(' '));
         }
 
-        $('#guesses').text(gameCode.guessesRemaining);
+        $('#guesses').text(`Guesses Remaining: ${gameCode.guessesRemaining}`);
+
+        $('#wins').text(`Wins: ${gameCode.wins}`)
     },
 
     makeUpperCase: function () {
@@ -31,32 +35,24 @@ const gameCode = {
     },
 
     checkInput: function () {
+        console.log(`check input`)
         for (let i = 0; i < alphabet.length; i++) {
 
             if (guessCap === alphabet[i]) {
+                gameCode.alphabet = true;
 
                 for (let i = 0; i <= gameCode.lettersUsed.length; i++) {
                     if (guessCap === gameCode.lettersUsed[i]) {
-                        console.log('used')
                         gameCode.used = true;
                         break;
                     } else {
-                        console.log('not used')
                         gameCode.used = false;
-                        console.log(gameCode.lettersUsed);
                     }
                 }
-                console.log('console log used ' + gameCode.used);
+
                 if (gameCode.used === false) {
-                    gameCode.lettersUsed.push(guessCap);
-                    console.log('hello');
                     gameCode.correctInput = true;
                     gameCode.guessesRemaining -= 1;
-                    //game over alert if statement.
-                    if (gameCode.guessesRemaining === 0) {
-                        alert('You Lose!');
-                        //reset game
-                    }
                     break;
                 }
             } else {
@@ -67,34 +63,98 @@ const gameCode = {
     },
 
     checkForLetterMatch: function () {
+        console.log('check for letter match')
         if (gameCode.correctInput === true) {
-
+            let correctGuess = false;
             for (let i = 0; i < gameCode.currentWord.length; i++) {
                 if (guessCap === gameCode.currentWord[i]) {
                     gameCode.displayedWord[i] = guessCap;
-                    gameCode.guessesRemaining += 1;
+                    correctGuess = true
                 };
             };
+
+            if (correctGuess === true) {
+                gameCode.guessesRemaining += 1;
+            }
         };
     },
 
     updateEverything: function () {
+        if (gameCode.alphabet === true && gameCode.used === false) {
+            gameCode.lettersUsed.push(guessCap);
+        };
         console.log('update everything');
-        console.log(gameCode.correctInput);
         if (gameCode.correctInput === true) {
             $('#usedLetters').append(guessCap);
-            $('#guesses').text(gameCode.guessesRemaining);
+            $('#guesses').text(`Guesses Remaining: ${gameCode.guessesRemaining}`);
             $('#randomWord').text(gameCode.displayedWord.join(' '));
         }
-    }
-}
+    },
+
+    winLossHandler: function () {
+        for (i = 0; i < gameCode.displayedWord.length; i++) {
+            if (gameCode.displayedWord[i] === "_") {
+                gameCode.winCondition = false;
+                break;
+            } else {
+                gameCode.winCondition = true;
+            }
+        };
+
+        console.log(`win handler condition: ${gameCode.winCondition}`);
+        if (gameCode.winCondition === true) {
+            $('#alerts').text('you win, press any key to continue.')
+        } else if (gameCode.guessesRemaining === 0) {
+            $('#alerts').text('You Lose! Press any key to play again!');
+        }
+
+    },
+
+    resetGame: function () {
+        if (gameCode.guessesRemaining === 0) {
+            //reset game
+            gameCode.playerGuess = [];
+            gameCode.lettersUsed = [];
+            gameCode.displayedWord = [];
+            gameCode.wins = 0;
+            $('#wins').text(`Wins: ${gameCode.wins}`)
+            gameCode.guessesRemaining = 7;
+            gameCode.alphabet = false;
+            gameCode.updateEverything();
+            gameCode.getRandomWord();
+            $('#usedLetters').text('Letters already guessed:');
+        };
+
+        console.log(`conditino right before ${gameCode.winCondition}`)
+        if (gameCode.winCondition === true) {
+            //reset game
+            gameCode.playerGuess = [];
+            gameCode.lettersUsed = [];
+            gameCode.displayedWord = [];
+            gameCode.guessesRemaining = 7;
+            gameCode.wins += 1;
+            gameCode.alphabet = false;
+            gameCode.updateEverything();
+            gameCode.getRandomWord();
+            $('#usedLetters').text('Letters already guessed:');
+            gameCode.winCondition = false;
+            console.log(`win condition: ${gameCode.winCondition}`);
+
+        };
+    },
+};
 
 
 gameCode.getRandomWord();
 
-$(document).on('keyup', function (e) {
-    gameCode.makeUpperCase();
-    gameCode.checkInput();
-    gameCode.checkForLetterMatch();
-    gameCode.updateEverything();
+$(document).on('keyup', function () {
+    if (gameCode.guessesRemaining === 0 || gameCode.winCondition === true) {
+        gameCode.resetGame();
+    } else {
+        gameCode.makeUpperCase();
+        gameCode.checkInput();
+        gameCode.checkForLetterMatch();
+        gameCode.updateEverything();
+        gameCode.winLossHandler();
+    }
 });

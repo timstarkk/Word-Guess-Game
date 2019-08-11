@@ -28,31 +28,35 @@
             margin-top: 5px;
             margin-bottom: 5px;
         }
+
+        .border {
+            border: 2px solid black;
+        }
     </style>
 </head>
 
 <body class="container-fluid">
 
     <div class="row">
-        <h1>GUESSING GAME</h1>
+        <h1 class="col-12 text-center">GUESSING GAME</h1>
     </div>
     <div class="row">
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    press any key to get started (make hidden on any keypress)
-                </div>
-                <div class="col-12" id="randomWord">
+                <h5 class="col-12 text-center" id="alerts">
+                    press any key to get started!
+                </h5>
+                <div class="col-12 text-center" id="randomWord">
 
                 </div>
-                <div class="col-md-6" id="wins">
-                    wins:
+                <div class="col-md-6 text-center" id="wins">
+                    Wins:
                 </div>
-                <div class="col-md-6" id="guesses">
-                    guesses remaining:
+                <div class="col-md-6 text-center" id="guesses">
+                    Guesses Remaining:
                 </div>
                 <div class="col-12" id="usedLetters">
-                    Letters already guessed.
+                    Letters Already Guessed:
                 </div>
             </div>
         </div>
