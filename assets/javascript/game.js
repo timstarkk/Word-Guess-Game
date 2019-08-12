@@ -105,10 +105,12 @@ const gameCode = {
         console.log(`win handler condition: ${gameCode.winCondition}`);
         if (gameCode.winCondition === true) {
             $('#alerts').text('You Win! press any key to continue.')
+            $('#alerts').html(`<img src="assets/images/loseSnow.gif">`);
             document.querySelector('#winSound').play();
             console.log('you win');
         } else if (gameCode.guessesRemaining === 0) {
             $('#alerts').text('You Lose! Press any key to play again...');
+            $('#alerts').html(`<img src="assets/images/loseSnow.gif">`);
             document.querySelector('#loseSound').play();
         }
 
@@ -154,6 +156,10 @@ gameCode.getRandomWord();
 $(document).on('keyup', function () {
     if (gameCode.guessesRemaining === 0 || gameCode.winCondition === true) {
         gameCode.resetGame();
+        document.querySelector('#winSound').pause();
+        document.querySelector('#winSound').currentTime = 0.0;
+        document.querySelector('#loseSound').pause();
+        document.querySelector('#loseSound').currentTime = 0.0;
     } else {
         gameCode.makeUpperCase();
         gameCode.checkInput();
