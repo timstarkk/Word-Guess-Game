@@ -1,13 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Merriweather|Roboto&display=swap');
+
 body {
     background-image: url("../images/westerosDrawing.jpg");
     background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
-	height: 100vh;
+    height: 110vh;
+    z-index: -10;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
 }
 
-h1 {
-    color: green;
+.banner1 {
+    position: relative;
+    top: 60px;
+}
+
+.banner2 {
+    position: relative;
+    right: 183px;
+    top: 60px;
+    z-index: -5;
+}
+
+.top {
+    position: absolute;
+    width: 100vw;
+    top: 10px;
+    z-index: -5;
+}
+
+.above {
+    position: relative;
+    top: 220px;
+
 }
 
 #guessLogo {
@@ -17,16 +43,64 @@ h1 {
 .logoBox {
     display: flex;
     justify-content: center;
+    height: 208px;
 }
 
 .tan {
     background: #E6D7B7;
 }
 
-.goldBorder {
+.theLogoBorder {
+    border: 4px solid white;
+    min-width: 322px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.theBorder {
     border: 2px solid white;
 }
-/* 
-.gif {
-    height: 30px;
-} */
+
+.pad {
+    padding: 10px;
+}
+
+.floatLeft {
+    float: left;
+    margin-left: 100px;
+}
+
+.floatLeft::after {
+    content: ' ';
+    clear: both;
+    display: auto;
+}
+
+.heightControl {
+    max-height: 220px;
+}
+
+.paddingTop {
+    padding-top: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.marginTop {
+    margin-top: 40px;
+}
+
+@media only screen 
+  and (max-width: 1024px) {
+
+    .banner1 {
+        visibility: hidden;
+    }
+
+    .banner2 {
+        visibility: hidden;
+    }
+
+
+
+}

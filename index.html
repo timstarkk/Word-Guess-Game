@@ -34,9 +34,12 @@
 
 <body class="container-fluid">
 
-    <div class="row">
-        <div class="container">
-            <div class="row offset-3 col-6 tan goldBorder logoBox">
+    <div class="row top">
+        <div class="banner1 col-2">
+            <img src="assets/images/starkBanner.png" alt="Stark Banner">
+        </div>
+        <div class="container logoBox col-6">
+            <div class="row col-12 tan theLogoBorder logoBox">
                 <img src="assets/images/guessing.png" alt="guessing game" id="guessLogo">
                 <audio id="loseSound">
                     <source src="assets/audio/lose.mp3" type="audio/mpeg"></audio>
@@ -44,23 +47,26 @@
                     <source src="assets/audio/win.mp3" type="audio/mpeg"></audio>
             </div>
         </div>
+        <div class="banner2 col-2">
+            <img src="assets/images/starkBanner.png" alt="Stark Banner">
+        </div>
     </div>
-    <div class="row">
-        <div class="container tan goldBorder">
+    <div class="row above">
+        <div class="container tan theBorder marginTop">
             <div class="row">
-                <h5 class="col-12 text-center goldBorder " id="alerts">
+                <div class="col-12 text-center theBorder pad" id="alerts">
                     press any key to get started!
-                </h5>
-                <div class="col-12 text-center goldBorder" id="randomWord">
+                </div>
+                <div class="col-12 text-center theBorder pad" id="randomWord">
 
                 </div>
-                <div class="col-md-6 text-center goldBorder" id="wins">
+                <div class="col-md-6 text-center theBorder" id="wins">
                     Wins:
                 </div>
-                <div class="col-md-6 text-center goldBorder" id="guesses">
+                <div class="col-md-6 text-center theBorder" id="guesses">
                     Guesses Remaining:
                 </div>
-                <div class="col-12 goldBorder" id="usedLetters">
+                <div class="col-12 theBorder" id="usedLetters">
                     Letters Already Guessed:
                 </div>
             </div>
